@@ -12,17 +12,23 @@ import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
+import { useFetchTransactions } from "../../api";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { data, loading, error } = useFetchTransactions({
+    startDate: new Date(),
+    interval: 5000,
+  });
+
+  console.log({ data, loading, error });
 
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
-
+        <Header title="Dashboard" subtitle="Welcome to your dashboard" />
         <Box>
           <Button
             sx={{
