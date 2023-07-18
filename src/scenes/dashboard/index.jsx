@@ -19,8 +19,15 @@ const Dashboard = () => {
   const colors = tokens(theme.palette.mode);
   const { data, loading, error } = useFetchTransactions({
     startDate: new Date(),
-    interval: 5000,
+    interval: 1000,
   });
+
+  const fraudulentTransactions = data?.filter(
+    (transaction) => transaction.classification === "FRAUDULENT"
+  ).length;
+  const genuineTransactions = data?.filter(
+    (transaction) => transaction.classification === "GENUINE"
+  ).length;
 
   console.log({ data, loading, error });
 
@@ -61,8 +68,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
+            title={fraudulentTransactions}
+            subtitle="Fraudes"
             progress="0.75"
             increase="+14%"
             icon={
@@ -80,8 +87,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            // title="431,225"
-            subtitle="Sales Obtained"
+            title={genuineTransactions}
+            subtitle="Legítimas"
             progress="0.50"
             increase="+21%"
             icon={
