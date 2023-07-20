@@ -11,7 +11,12 @@ import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
+<<<<<<< HEAD
 import ProgressCircle from "../../components/ProgressCircle";
+=======
+/* import ProgressCircle from "../../components/ProgressCircle"; */
+import PieChart from "../../components/PieChart";
+>>>>>>> 326f0c2 (Meu segundo commit)
 import { useFetchTransactions } from "../../api";
 
 const Dashboard = () => {
@@ -24,10 +29,20 @@ const Dashboard = () => {
 
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"
+<<<<<<< HEAD
   ).length;
   const genuineTransactions = data?.filter(
     (transaction) => transaction.classification === "GENUINE"
   ).length;
+=======
+  )?.length;
+  
+  const genuineTransactions = data?.filter(
+    (transaction) => transaction.classification === "GENUINE"
+  )?.length;
+
+  const countTransactions = data?.length;
+>>>>>>> 326f0c2 (Meu segundo commit)
 
   console.log({ data, loading, error });
 
@@ -68,8 +83,13 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
+<<<<<<< HEAD
             title={fraudulentTransactions}
             subtitle="Fraudes"
+=======
+            title={countTransactions}
+            subtitle="Total de Transações"
+>>>>>>> 326f0c2 (Meu segundo commit)
             progress="0.75"
             increase="+14%"
             icon={
@@ -237,6 +257,7 @@ const Dashboard = () => {
           p="30px"
         >
           <Typography variant="h5" fontWeight="600">
+<<<<<<< HEAD
             Campaign
           </Typography>
           <Box
@@ -254,6 +275,12 @@ const Dashboard = () => {
               $48,352 revenue generated
             </Typography>
             <Typography>Includes extra misc expenditures and costs</Typography>
+=======
+            Comparativo de Fraudes e legitimos
+          </Typography>
+          <Box height="250px" m="-20px 0 0 0">
+            <PieChart isDashboard={true} />
+>>>>>>> 326f0c2 (Meu segundo commit)
           </Box>
         </Box>
         <Box

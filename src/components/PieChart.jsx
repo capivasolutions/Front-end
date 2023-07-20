@@ -1,6 +1,7 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
+<<<<<<< HEAD
 import { mockPieData as data } from "../data/mockData";
 
 const PieChart = () => {
@@ -9,6 +10,46 @@ const PieChart = () => {
   return (
     <ResponsivePie
       data={data}
+=======
+/* import { mockPieData as data } from "../data/mockData"; */
+import { useFetchTransactions } from "../api";
+
+const PieChart = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode)
+  const { data, loading, error } = useFetchTransactions({
+    startDate: new Date(),
+    interval: 1000,
+  });
+
+  const fraudulentTransactions = data?.filter(
+    (transaction) => transaction.classification === "FRAUDULENT"
+  )?.length;
+  
+  const genuineTransactions = data?.filter(
+    (transaction) => transaction.classification === "GENUINE"
+  )?.length;
+
+  const dataNew = [
+    {
+      id: "Fraude",
+      label: "Fraudulentas",
+      value: fraudulentTransactions,
+      color: "hsl(104, 70%, 50%)",
+    },
+    {
+      id: "Genuina",
+      label: "Genuinas",
+      value: genuineTransactions,
+      color: "hsl(162, 70%, 50%)",
+    },
+  ];
+
+
+  return (
+    <ResponsivePie
+      data={dataNew}
+>>>>>>> 326f0c2 (Meu segundo commit)
       theme={{
         axis: {
           domain: {
