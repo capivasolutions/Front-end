@@ -11,12 +11,8 @@ import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
-<<<<<<< HEAD
-import ProgressCircle from "../../components/ProgressCircle";
-=======
 /* import ProgressCircle from "../../components/ProgressCircle"; */
 import PieChart from "../../components/PieChart";
->>>>>>> 326f0c2 (Meu segundo commit)
 import { useFetchTransactions } from "../../api";
 
 const Dashboard = () => {
@@ -29,28 +25,34 @@ const Dashboard = () => {
 
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"
-<<<<<<< HEAD
-  ).length;
-  const genuineTransactions = data?.filter(
-    (transaction) => transaction.classification === "GENUINE"
-  ).length;
-=======
   )?.length;
   
   const genuineTransactions = data?.filter(
     (transaction) => transaction.classification === "GENUINE"
   )?.length;
 
-  const countTransactions = data?.length;
->>>>>>> 326f0c2 (Meu segundo commit)
+  const totalAmount = data?.reduce((sum, transaction) => sum + transaction.amount, 0);
+  const formattedTotalAmount = `R$ ${totalAmount?.toFixed(2)}`;
 
-  console.log({ data, loading, error });
+  const countTransactions = data?.length;
+
+  /* Sum total os amount of genuines */
+  const totalAmountGenuine = data
+  ?.filter((transaction) => transaction.classification === "GENUINE")
+  .reduce((sum, transaction) => sum + transaction.amount, 0);
+  const formattedTotalAmountGenuine = `R$ ${totalAmountGenuine?.toFixed(2)}`;
+
+  /* Sum total os amount of fraudulents */
+  const totalAmountFraudulent = data
+    ?.filter((transaction) => transaction.classification === "FRAUDULENT")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+    const formattedTotalAmountFraudulent = `R$ ${totalAmountFraudulent?.toFixed(2)}`;
 
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Dashboard" subtitle="Welcome to your dashboard" />
+        <Header title="Painel Administrativo" subtitle="Bem Vindo!" />
         <Box>
           <Button
             sx={{
@@ -83,13 +85,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-<<<<<<< HEAD
-            title={fraudulentTransactions}
-            subtitle="Fraudes"
-=======
             title={countTransactions}
             subtitle="Total de Transações"
->>>>>>> 326f0c2 (Meu segundo commit)
             progress="0.75"
             increase="+14%"
             icon={
@@ -126,8 +123,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="32,441"
-            subtitle="New Clients"
+            title={fraudulentTransactions}
+            subtitle="Fraudulentas"
             progress="0.30"
             increase="+5%"
             icon={
@@ -145,8 +142,8 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="1,325,134"
-            subtitle="Traffic Received"
+            title= {formattedTotalAmount}
+            subtitle="Valor Total de Transações"
             progress="0.80"
             increase="+43%"
             icon={
@@ -176,14 +173,23 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Comparando valor médio de transações
+                Comparando valor de transações
               </Typography>
+              {/* Genuinas */}
               <Typography
-                variant="h3"
+                variant="h6"
+                fontWeight="bold"
+                color={colors.blueAccent[300]}
+              >
+                Vlr. Total de Fraudes: {formattedTotalAmountFraudulent}
+              </Typography>
+              {/* Fraudes */}
+              <Typography
+                variant="h6"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                Max: $59,342.32
+                Vlr. Total de Genuinos: {formattedTotalAmountGenuine} 
               </Typography>
             </Box>
             <Box>
@@ -257,30 +263,10 @@ const Dashboard = () => {
           p="30px"
         >
           <Typography variant="h5" fontWeight="600">
-<<<<<<< HEAD
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-=======
             Comparativo de Fraudes e legitimos
           </Typography>
           <Box height="250px" m="-20px 0 0 0">
             <PieChart isDashboard={true} />
->>>>>>> 326f0c2 (Meu segundo commit)
           </Box>
         </Box>
         <Box
@@ -293,7 +279,7 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Sales Quantity
+            Top 6 Parametros mais importantes
           </Typography>
           <Box height="250px" mt="-20px">
             <BarChart isDashboard={true} />

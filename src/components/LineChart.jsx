@@ -1,15 +1,115 @@
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import { mockLineData as data } from "../data/mockData";
+/* import { mockLineData as data } from "../data/mockData"; */
+import { useFetchTransactions } from "../api";
 
 const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { data, loading, error } = useFetchTransactions({
+    startDate: new Date(),
+    interval: 1000,
+  });
+
+
+ /*  const getFormattedData = () => {
+
+    const normalData = {
+      id: "Normal",
+      color: tokens("dark").blueAccent[300],
+      data: data
+        .filter((transaction) => transaction.classification === "GENUINE")
+        .map((transaction) => ({
+          x: new Date(transaction.created_at).toLocaleTimeString(),  // Assuming the 'date' property exists in the data
+          y: transaction.amount,
+        })),
+    };
+    
+    const fraudData = {
+      id: "Fraude",
+      color: tokens("dark").greenAccent[500],
+      data: data
+        .filter((transaction) => transaction.classification === "FRAUDULENT")
+        .map((transaction) => ({
+          x: new Date(transaction.created_at).toLocaleTimeString(), // Assuming the 'date' property exists in the data
+          y: transaction.amount,
+        })),
+    };
+
+    
+
+    return [fraudData, normalData];
+  };
+ */
+
+  const aggregateDataByTime = (transactions) => {
+    // Sort transactions by created_at time
+    const sortedTransactions = transactions.sort((a, b) =>
+      new Date(a.created_at) - new Date(b.created_at)
+    );
+
+    // Create a new map to aggregate data by time
+    const aggregatedData = new Map();
+
+    sortedTransactions.forEach((transaction) => {
+      const timeKey = new Date(transaction.created_at).toLocaleTimeString();
+      const existingData = aggregatedData.get(timeKey) || {
+        time: timeKey,
+        fraudAmount: 0,
+        normalAmount: 0,
+      };
+
+      if (transaction.classification === "GENUINE") {
+        existingData.normalAmount += transaction.amount;
+      } else if (transaction.classification === "FRAUDULENT") {
+        existingData.fraudAmount += transaction.amount;
+      }
+
+      aggregatedData.set(timeKey, existingData);
+    });
+
+    // Return an array of aggregated data objects
+    return Array.from(aggregatedData.values());
+  };
+
+  const getFormattedData = () => {
+    /* if (loading || error || !data || data.length === 0) {
+      return []; // Return empty data when loading, error, no data, or empty data array
+    } */
+
+    // Slice the last 10 transactions from the data array
+    const lastTenTransactions = data.slice(-10);
+
+    const aggregatedData = aggregateDataByTime(lastTenTransactions);
+
+    const normalData = {
+      id: "Normal",
+      color: tokens("dark").blueAccent[300],
+      data: aggregatedData.map((entry) => ({
+        x: entry.time,
+        y: entry.normalAmount,
+      })),
+    };
+
+    const fraudData = {
+      id: "Fraude",
+      color: tokens("dark").greenAccent[500],
+      data: aggregatedData.map((entry) => ({
+        x: entry.time,
+        y: entry.fraudAmount,
+      })),
+    };
+
+    return [fraudData, normalData];
+  };
+  const dataNew = getFormattedData();
+  /* console.log(dataNew) */
+
 
   return (
     <ResponsiveLine
-      data={data}
+      data={dataNew}
       theme={{
         axis: {
           domain: {

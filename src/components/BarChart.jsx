@@ -1,11 +1,21 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-import { mockBarData as data } from "../data/mockData";
+//import { mockBarData as data } from "../data/mockData";
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const data = [
+    { category: 'A1', value: 10 },
+    { category: 'A2', value: 20 },
+    { category: 'A3', value: 30 },
+    { category: 'A4', value: 40 },
+    { category: 'A5', value: 50 },
+    { category: 'A6', value: 60 },
+    // Add more data points as needed
+  ].sort((a, b) => a.value - b.value);
 
   return (
     <ResponsiveBar
@@ -39,10 +49,12 @@ const BarChart = ({ isDashboard = false }) => {
           },
         },
       }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
+      keys={["value"]}
+      indexBy="category"
+      colorBy="index"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
+      layout="horizontal"
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
       colors={{ scheme: "nivo" }}

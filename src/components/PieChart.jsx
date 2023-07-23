@@ -1,16 +1,6 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
-<<<<<<< HEAD
-import { mockPieData as data } from "../data/mockData";
-
-const PieChart = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <ResponsivePie
-      data={data}
-=======
 /* import { mockPieData as data } from "../data/mockData"; */
 import { useFetchTransactions } from "../api";
 
@@ -49,7 +39,6 @@ const PieChart = () => {
   return (
     <ResponsivePie
       data={dataNew}
->>>>>>> 326f0c2 (Meu segundo commit)
       theme={{
         axis: {
           domain: {
