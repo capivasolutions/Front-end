@@ -6,7 +6,7 @@ import { useFetchTransactions } from "../api";
 
 const PieChart = () => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode)
+  const colors = tokens(theme.palette.mode);
   const { data, loading, error } = useFetchTransactions({
     startDate: new Date(),
     interval: 1000,
@@ -15,7 +15,7 @@ const PieChart = () => {
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"
   )?.length;
-  
+
   const genuineTransactions = data?.filter(
     (transaction) => transaction.classification === "GENUINE"
   )?.length;
@@ -23,18 +23,17 @@ const PieChart = () => {
   const dataNew = [
     {
       id: "Fraude",
-      label: "Fraudulentas",
+      label: "Fraudes",
       value: fraudulentTransactions,
       color: "hsl(104, 70%, 50%)",
     },
     {
       id: "Genuina",
-      label: "Genuinas",
+      label: "Legítimos",
       value: genuineTransactions,
       color: "hsl(162, 70%, 50%)",
     },
   ];
-
 
   return (
     <ResponsivePie

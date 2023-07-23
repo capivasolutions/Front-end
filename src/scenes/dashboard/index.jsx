@@ -1,24 +1,24 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
+import CreditCardIcon from "@mui/icons-material/CreditCardOutlined";
+import PaymentsIcon from "@mui/icons-material/PaymentsOutlined";
+import CancelIcon from "@mui/icons-material/CloseOutlined";
+import DoneIcon from "@mui/icons-material/DoneOutlined";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
-/* import ProgressCircle from "../../components/ProgressCircle"; */
 import PieChart from "../../components/PieChart";
 import { useFetchTransactions } from "../../api";
+import { CurrencyUtils } from "../../utils/currency";
+import { RecentTransactions } from "../recent-transactions";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, loading, error } = useFetchTransactions({
+  const { data } = useFetchTransactions({
     startDate: new Date(),
     interval: 1000,
   });
@@ -26,27 +26,33 @@ const Dashboard = () => {
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"
   )?.length;
-  
+
   const genuineTransactions = data?.filter(
     (transaction) => transaction.classification === "GENUINE"
   )?.length;
 
-  const totalAmount = data?.reduce((sum, transaction) => sum + transaction.amount, 0);
-  const formattedTotalAmount = `R$ ${totalAmount?.toFixed(2)}`;
+  const totalAmount = data?.reduce(
+    (sum, transaction) => sum + transaction.amount,
+    0
+  );
+  const formattedTotalAmount = CurrencyUtils.toBrazilianCurrency(totalAmount);
 
   const countTransactions = data?.length;
 
   /* Sum total os amount of genuines */
   const totalAmountGenuine = data
-  ?.filter((transaction) => transaction.classification === "GENUINE")
-  .reduce((sum, transaction) => sum + transaction.amount, 0);
-  const formattedTotalAmountGenuine = `R$ ${totalAmountGenuine?.toFixed(2)}`;
+    ?.filter((transaction) => transaction.classification === "GENUINE")
+    .reduce((sum, transaction) => sum + transaction.amount, 0);
+  const formattedTotalAmountGenuine =
+    CurrencyUtils.toBrazilianCurrency(totalAmountGenuine);
 
   /* Sum total os amount of fraudulents */
   const totalAmountFraudulent = data
     ?.filter((transaction) => transaction.classification === "FRAUDULENT")
     .reduce((sum, transaction) => sum + transaction.amount, 0);
-    const formattedTotalAmountFraudulent = `R$ ${totalAmountFraudulent?.toFixed(2)}`;
+  const formattedTotalAmountFraudulent = CurrencyUtils.toBrazilianCurrency(
+    totalAmountFraudulent
+  );
 
   return (
     <Box m="20px">
@@ -86,11 +92,11 @@ const Dashboard = () => {
         >
           <StatBox
             title={countTransactions}
-            subtitle="Total de Transações"
+            subtitle="Número de transações"
             progress="0.75"
             increase="+14%"
             icon={
-              <EmailIcon
+              <CreditCardIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -105,11 +111,11 @@ const Dashboard = () => {
         >
           <StatBox
             title={genuineTransactions}
-            subtitle="Legítimas"
+            subtitle="Legítimos"
             progress="0.50"
             increase="+21%"
             icon={
-              <PointOfSaleIcon
+              <DoneIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -124,11 +130,11 @@ const Dashboard = () => {
         >
           <StatBox
             title={fraudulentTransactions}
-            subtitle="Fraudulentas"
+            subtitle="Fraudes"
             progress="0.30"
             increase="+5%"
             icon={
-              <PersonAddIcon
+              <CancelIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -142,12 +148,12 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title= {formattedTotalAmount}
-            subtitle="Valor Total de Transações"
+            title={formattedTotalAmount}
+            subtitle="Valor total de transações"
             progress="0.80"
             increase="+43%"
             icon={
-              <TrafficIcon
+              <PaymentsIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
@@ -169,7 +175,7 @@ const Dashboard = () => {
           >
             <Box>
               <Typography
-                variant="h5"
+                variant="h4"
                 fontWeight="600"
                 color={colors.grey[100]}
               >
@@ -181,7 +187,7 @@ const Dashboard = () => {
                 fontWeight="bold"
                 color={colors.blueAccent[300]}
               >
-                Vlr. Total de Fraudes: {formattedTotalAmountFraudulent}
+                Valor total de fraudes: {formattedTotalAmountFraudulent}
               </Typography>
               {/* Fraudes */}
               <Typography
@@ -189,7 +195,7 @@ const Dashboard = () => {
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                Vlr. Total de Genuinos: {formattedTotalAmountGenuine} 
+                Valor total de legítimos: {formattedTotalAmountGenuine}
               </Typography>
             </Box>
             <Box>
@@ -210,49 +216,7 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
-          >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-          {mockTransactions.map((transaction, i) => (
-            <Box
-              key={`${transaction.txId}-${i}`}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              p="15px"
-            >
-              <Box>
-                <Typography
-                  color={colors.greenAccent[500]}
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                backgroundColor={colors.greenAccent[500]}
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
-            </Box>
-          ))}
+          <RecentTransactions transactions={data} />
         </Box>
 
         {/* ROW 3 */}
