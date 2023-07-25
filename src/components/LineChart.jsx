@@ -51,8 +51,8 @@ const LineChart = ({
     const aggregatedData = aggregateDataByTime(lastTenTransactions);
 
     const normalData = {
-      id: "Normal",
-      color: tokens("dark").blueAccent[300],
+      id: "Legítimo",
+      color: tokens("dark").greenAccent[500],
       data: aggregatedData.map((entry) => ({
         x: entry.time,
         y: entry.normalAmount,
@@ -61,7 +61,7 @@ const LineChart = ({
 
     const fraudData = {
       id: "Fraude",
-      color: tokens("dark").greenAccent[500],
+      color: tokens("dark").blueAccent[500],
       data: aggregatedData.map((entry) => ({
         x: entry.time,
         y: entry.fraudAmount,

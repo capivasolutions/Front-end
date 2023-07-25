@@ -28,6 +28,9 @@ const Dashboard = () => {
     startDate,
   });
 
+  const genuineCOlor = colors.greenAccent[500];
+  const fraudulentColor = colors.redAccent[500];
+
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"
   )?.length;
