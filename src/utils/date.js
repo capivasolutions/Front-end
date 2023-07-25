@@ -9,6 +9,30 @@ const timeZone = dayjs.tz.guess()
 console.log('timeZone', timeZone)
 
 export class DateUtils {
+  static now() {
+    return dayjs();
+  }
+
+  static hourAgo() {
+    return dayjs().subtract(1, 'hour');
+  }
+
+  static dayAgo() {
+    return dayjs().subtract(1, 'day');
+  }
+
+  static weekAgo() {
+    return dayjs().subtract(1, 'week');
+  }
+
+  static monthAgo() {
+    return dayjs().subtract(1, 'month');
+  }
+
+  static yearAgo() {
+    return dayjs().subtract(1, 'year');
+  }
+
   static relativeDatefromNow(date) {
     console.log('DATE', date);
     return dayjs.utc(`${date}Z`).tz(timeZone).format('DD/MM/YYYY HH:mm:ss')

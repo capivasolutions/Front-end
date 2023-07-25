@@ -1,52 +1,19 @@
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
-/* import { mockLineData as data } from "../data/mockData"; */
-import { useFetchTransactions } from "../api";
 
-const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
+const LineChart = ({
+  data = [],
+  isCustomLineColors = false,
+  isDashboard = false,
+}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, loading, error } = useFetchTransactions({
-    startDate: new Date(),
-    interval: 1000,
-  });
-
-
- /*  const getFormattedData = () => {
-
-    const normalData = {
-      id: "Normal",
-      color: tokens("dark").blueAccent[300],
-      data: data
-        .filter((transaction) => transaction.classification === "GENUINE")
-        .map((transaction) => ({
-          x: new Date(transaction.created_at).toLocaleTimeString(),  // Assuming the 'date' property exists in the data
-          y: transaction.amount,
-        })),
-    };
-    
-    const fraudData = {
-      id: "Fraude",
-      color: tokens("dark").greenAccent[500],
-      data: data
-        .filter((transaction) => transaction.classification === "FRAUDULENT")
-        .map((transaction) => ({
-          x: new Date(transaction.created_at).toLocaleTimeString(), // Assuming the 'date' property exists in the data
-          y: transaction.amount,
-        })),
-    };
-
-    
-
-    return [fraudData, normalData];
-  };
- */
 
   const aggregateDataByTime = (transactions) => {
     // Sort transactions by created_at time
-    const sortedTransactions = transactions.sort((a, b) =>
-      new Date(a.created_at) - new Date(b.created_at)
+    const sortedTransactions = transactions.sort(
+      (a, b) => new Date(a.created_at) - new Date(b.created_at)
     );
 
     // Create a new map to aggregate data by time
@@ -105,7 +72,6 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   };
   const dataNew = getFormattedData();
   /* console.log(dataNew) */
-
 
   return (
     <ResponsiveLine

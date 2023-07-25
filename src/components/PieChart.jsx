@@ -1,16 +1,10 @@
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
-/* import { mockPieData as data } from "../data/mockData"; */
-import { useFetchTransactions } from "../api";
 
-const PieChart = () => {
+const PieChart = ({ data = [] }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, loading, error } = useFetchTransactions({
-    startDate: new Date(),
-    interval: 1000,
-  });
 
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"

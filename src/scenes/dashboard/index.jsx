@@ -14,13 +14,18 @@ import PieChart from "../../components/PieChart";
 import { useFetchTransactions } from "../../api";
 import { CurrencyUtils } from "../../utils/currency";
 import { RecentTransactions } from "../recent-transactions";
+import { StartDateSelector } from "../../components/StartDateSelector";
+import { useStartDate } from "../../hooks/useStartDate";
+
+const UPDATE_SCREEN_INTERVAL = 2000; // ms
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { startDate } = useStartDate();
   const { data } = useFetchTransactions({
-    startDate: new Date(),
-    interval: 1000,
+    interval: UPDATE_SCREEN_INTERVAL,
+    startDate,
   });
 
   const fraudulentTransactions = data?.filter(
@@ -59,14 +64,22 @@ const Dashboard = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Painel Administrativo" subtitle="Bem Vindo!" />
-        <Box>
+        <Box
+          gap={2}
+          width="100%"
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="flex-end"
+        >
+          <StartDateSelector />
           <Button
             sx={{
               backgroundColor: colors.blueAccent[700],
               color: colors.grey[100],
               fontSize: "14px",
               fontWeight: "bold",
-              padding: "10px 20px",
+              padding: "14px 20px",
             }}
           >
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
@@ -207,7 +220,7 @@ const Dashboard = () => {
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
+            <LineChart data={data} isDashboard={true} />
           </Box>
         </Box>
         <Box
@@ -230,7 +243,7 @@ const Dashboard = () => {
             Comparativo de Fraudes e legitimos
           </Typography>
           <Box height="250px" m="-20px 0 0 0">
-            <PieChart isDashboard={true} />
+            <PieChart data={data} isDashboard={true} />
           </Box>
         </Box>
         <Box
