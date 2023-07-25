@@ -8,8 +8,6 @@ export function RecentTransactions({ transactions }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  console.log(transactions.at(-1));
-
   const sortedTransactions = transactions.map((transaction) => {
     const { id, created_at, amount, classification } = transaction;
     return { id, created_at, amount, classification };
@@ -17,8 +15,6 @@ export function RecentTransactions({ transactions }) {
     new Date(b.created_at) - new Date(a.created_at)
   );
   const lastTransactions = sortedTransactions.splice(0, 10);
-
-  console.log(sortedTransactions);
 
   return (
     <>

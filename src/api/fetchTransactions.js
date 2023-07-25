@@ -6,9 +6,8 @@ export function useFetchTransactions({ startDate, interval }) {
   const { get, data = [], loading, error } = useFetch(BACKEND_URL, { cacheLife: 0, cachePolicy: 'no-cache', loading: true });
 
   const fetchTransactions = useCallback(async () => {
-    console.log(new Date(startDate).toJSON())
     await get(`/transactions?start_date=${new Date(startDate).toJSON()}`);
-  }, []);
+  }, [get, startDate]);
 
   useEffect(() => {
     let subscription = null;
@@ -20,7 +19,7 @@ export function useFetchTransactions({ startDate, interval }) {
     }
 
     return () => clearInterval(subscription);
-  }, []);
+  }, [startDate, interval, fetchTransactions]);
 
   return { data, loading, error };
 }

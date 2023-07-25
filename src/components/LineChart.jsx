@@ -71,7 +71,6 @@ const LineChart = ({
     return [fraudData, normalData];
   };
   const dataNew = getFormattedData();
-  /* console.log(dataNew) */
 
   return (
     <ResponsiveLine

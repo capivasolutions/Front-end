@@ -17,7 +17,7 @@ import { RecentTransactions } from "../recent-transactions";
 import { StartDateSelector } from "../../components/StartDateSelector";
 import { useStartDate } from "../../hooks/useStartDate";
 
-const UPDATE_SCREEN_INTERVAL = 1000; // ms
+const UPDATE_SCREEN_INTERVAL = 2000; // ms
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -27,9 +27,6 @@ const Dashboard = () => {
     interval: UPDATE_SCREEN_INTERVAL,
     startDate,
   });
-
-  const genuineCOlor = colors.greenAccent[500];
-  const fraudulentColor = colors.redAccent[500];
 
   const fraudulentTransactions = data?.filter(
     (transaction) => transaction.classification === "FRAUDULENT"
