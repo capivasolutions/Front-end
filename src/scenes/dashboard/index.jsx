@@ -16,6 +16,7 @@ import { CurrencyUtils } from "../../utils/currency";
 import { RecentTransactions } from "../recent-transactions";
 import { StartDateSelector } from "../../components/StartDateSelector";
 import { useStartDate } from "../../hooks/useStartDate";
+import { useNavigate } from "react-router-dom";
 
 const UPDATE_SCREEN_INTERVAL = 2000; // ms
 
@@ -58,6 +59,18 @@ const Dashboard = () => {
   const formattedTotalAmountFraudulent = CurrencyUtils.toBrazilianCurrency(
     totalAmountFraudulent
   );
+
+  const navigate = useNavigate();
+  // Função para lidar com o redirecionamento quando uma transação é clicada
+  const handleTransactionClick = (transaction) => {
+    // Aqui, você pode usar os dados da transação para criar a URL com um filtro ou realizar qualquer outra ação desejada
+    // Por exemplo, você pode usar o ID da transação para criar uma URL com um parâmetro de consulta:
+    // window.location.href = `/detalhes-da-transacao?id=${transaction.id}`;
+
+    // Neste exemplo, vamos supor que você esteja usando o React Router
+    // E que a rota "/detalhes-da-transacao" esteja configurada para renderizar a página com os detalhes da transação
+    navigate(`/transaction-details/${transaction.id}`);
+  };
 
   return (
     <Box m="20px">
@@ -229,7 +242,7 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <RecentTransactions transactions={data} />
+          <RecentTransactions transactions={data} onClickTransaction={handleTransactionClick}/>
         </Box>
 
         {/* ROW 3 */}

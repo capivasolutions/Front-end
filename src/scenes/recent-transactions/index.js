@@ -4,7 +4,7 @@ import { tokens } from "../../theme";
 import { CurrencyUtils } from "../../utils/currency";
 import { DateUtils } from "../../utils/date";
 
-export function RecentTransactions({ transactions }) {
+export function RecentTransactions({ transactions, onClickTransaction }) {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -34,7 +34,7 @@ export function RecentTransactions({ transactions }) {
         <TransitionGroup>
           {
             lastTransactions.map((transaction, i) => (
-              <Collapse key={transaction.id}>
+              <Collapse key={transaction.id} onClick={() => onClickTransaction(transaction)}>
                 <Box
                   display="flex"
                   justifyContent="space-between"

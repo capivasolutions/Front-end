@@ -119,6 +119,13 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Detalhamento"
+              to="/transaction-details"
+              icon={<MapOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Bar Chart"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
