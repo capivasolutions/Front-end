@@ -7,25 +7,14 @@ export const ParallelChart = ({ data }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const fraudulentData = data.filter(
-    (transaction) => transaction.classification === "FRAUDULENT"
-  );
-  const genuineData = data.filter(
-    (transaction) => transaction.classification === "GENUINE"
-  );
-  const filteredData = [
-    ...genuineData.slice(0, 200),
-    ...fraudulentData.slice(0, 1),
-  ];
-
-  const chartColors = filteredData.map((item) => {
+  const chartColors = data.map((item) => {
     if (item.classification === "FRAUDULENT") return colors.blueAccent[500];
     else return colors.greenAccent[500];
   });
 
   return (
     <ResponsiveParallelCoordinates
-      data={filteredData}
+      data={data}
       variables={[
         { key: "v1", type: "linear" },
         { key: "v2", type: "linear" },
