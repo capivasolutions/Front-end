@@ -17,6 +17,8 @@ import { RecentTransactions } from "../recent-transactions";
 import { StartDateSelector } from "../../components/StartDateSelector";
 import { useStartDate } from "../../hooks/useStartDate";
 import { useNavigate } from "react-router-dom";
+import { mockParallelData } from "../../data/mockData";
+import { ParallelChart } from "../../components/ParallelChart";
 
 const UPDATE_SCREEN_INTERVAL = 2000; // ms
 
@@ -187,6 +189,13 @@ const Dashboard = () => {
         </Box>
 
         {/* ROW 2 */}
+        <Box
+          gridColumn="span 12"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <ParallelChart data={data} />
+        </Box>
         <Box
           gridColumn="span 8"
           gridRow="span 2"
