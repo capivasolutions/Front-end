@@ -2,7 +2,12 @@ import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
 
-const PieChart = ({ data = [] }) => {
+const purplePalette = ["#6870fa", "#4cceac"];
+
+const PieChart = ({ 
+    data = [],
+    isCustomLineColors = false,
+  }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -19,19 +24,20 @@ const PieChart = ({ data = [] }) => {
       id: "Fraude",
       label: "Fraudes",
       value: fraudulentTransactions,
-      color: "hsl(104, 70%, 50%)",
+      color: tokens("dark").blueAccent[500],
     },
     {
       id: "Genuina",
       label: "Legítimos",
       value: genuineTransactions,
-      color: "hsl(162, 70%, 50%)",
+      color: tokens("dark").greenAccent[500],
     },
   ];
 
   return (
     <ResponsivePie
       data={dataNew}
+      colors={purplePalette}
       theme={{
         axis: {
           domain: {
@@ -57,6 +63,11 @@ const PieChart = ({ data = [] }) => {
         legends: {
           text: {
             fill: colors.grey[100],
+          },
+        },
+        tooltip: {
+          container: {
+            color: colors.primary[500],
           },
         },
       }}

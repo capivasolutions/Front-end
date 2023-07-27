@@ -17,6 +17,8 @@ import { RecentTransactions } from "../recent-transactions";
 import { StartDateSelector } from "../../components/StartDateSelector";
 import { useStartDate } from "../../hooks/useStartDate";
 import { useNavigate } from "react-router-dom";
+import { mockBarImportance} from "../../data/mockAnalyze";
+
 
 const UPDATE_SCREEN_INTERVAL = 2000; // ms
 
@@ -274,8 +276,8 @@ const Dashboard = () => {
           >
             Top 6 Parametros mais importantes
           </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
+            <BarChart isDashboard={true} data={mockBarImportance} />
           </Box>
         </Box>
         <Box
