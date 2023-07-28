@@ -1,8 +1,9 @@
 import React from "react";
-import Header from "../../components/Header";
+import {CircularProgress } from "@mui/material";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import Header from "../../components/Header";
 import BarChart from "../../components/BarChart";
 import { StartDateSelector } from "../../components/StartDateSelector";
 import { mockBarV4
@@ -20,9 +21,8 @@ import { useFetchTransaction } from "../../api/fetchTransaction";
 import { ParallelChart } from "../../components/ParallelChart";
 
 
-
-
-export default function TransactionDetails() {
+// PRINCIPAL
+const TransactionDetails = () => {
   const { transactionId } = useParams();
   const { data, loading, error } = useFetchTransaction({
     id: transactionId,
@@ -32,10 +32,6 @@ export default function TransactionDetails() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   // const { startDate } = useStartDate();
-  // const { data } = useFetchTransactions({
-  //   interval: UPDATE_SCREEN_INTERVAL,
-  //   startDate,
-  // });
 
   console.log("error", loading);
 
@@ -58,7 +54,7 @@ export default function TransactionDetails() {
   if (error) {
     return (
       <Box m="20px">
-        <Header title="Pie Chart" subtitle="Simple Pie Chart" />
+        <Header title="Erro" subtitle="Sinto Muito" />
         <Box height="75vh">Ops, transação não encontrada!</Box>
         {/* TODO: construir tela de erro */}
       </Box>
@@ -97,20 +93,47 @@ export default function TransactionDetails() {
       </Box>
 
       {/* GRID & CHARTS */}
-      Grafico de linhas paralelas
-      <Box m="20px">
-        <Header title="Pie Chart" subtitle="Simple Pie Chart" />
-        <Box height="60vh">
-          {<ParallelChart data={[data?.transaction, ...data.comparable]} />}
-        </Box>
-      </Box>
-
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
       >
+        {/* ROW 2 */}
+        <Box
+          gridColumn="span 12"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Box
+            mt="25px"
+            p="0 30px"
+            display="flex "
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Box>
+              <Typography
+                variant="h4"
+                fontWeight="600"
+                color={colors.grey[100]}
+              >
+                Comparação de Parametros
+              </Typography>
+            </Box>
+            <Box>
+              {/* <IconButton>
+                <DownloadOutlinedIcon
+                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                />
+              </IconButton> */}
+            </Box>
+          </Box>
+          <Box height="250px" m="-20px 0 0 0">
+            {<ParallelChart data={[data?.transaction, ...data.comparable]} />}
+          </Box>
+        </Box>
+
         {/* ROW 1 */}
         <Box
           gridColumn="span 4"
@@ -272,3 +295,25 @@ export default function TransactionDetails() {
   );
 };
 
+export default TransactionDetails;
+
+// import { Box } from "@mui/material";
+// import Header from "../../components/Header";
+// import PieChart from "../../components/PieChart";
+// import { useParams } from "react-router-dom";
+
+// const TransactionDetails = () => {
+
+//   const { transactionId } = useParams();
+//   return (
+//     <Box m="20px">
+//       <Header title="Pie Chart" subtitle="Simple Pie Chart" />
+//       <Box height="75vh">
+//         id da transação que vou conectar depois: {transactionId}
+//         <PieChart />
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default TransactionDetails;
