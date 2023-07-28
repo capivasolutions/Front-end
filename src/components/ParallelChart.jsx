@@ -16,14 +16,15 @@ export const ParallelChart = ({ data }) => {
     <ResponsiveParallelCoordinates
       data={data}
       variables={[
-        { key: "v1", type: "linear" },
-        { key: "v2", type: "linear" },
-        { key: "v3", type: "linear" },
-        { key: "v4", type: "linear" },
-        { key: "v5", type: "linear" },
+        { key: "v17", type: "linear" },
+        { key: "v12", type: "linear" },
+        { key: "v14", type: "linear" },
+        { key: "v10", type: "linear" },
+        { key: "v11", type: "linear" },
       ]}
       curve="monotoneX"
       colors={chartColors}
+      lineWidth={10}
       margin={{ top: 50, right: 80, bottom: 50, left: 50 }}
       theme={{
         axis: {
