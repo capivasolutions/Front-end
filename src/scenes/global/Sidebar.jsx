@@ -7,6 +7,7 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import CreditCardIcon from "@mui/icons-material/CreditCardOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -116,9 +117,9 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Análise"
-              to="/transaction-details"
-              icon={<MapOutlinedIcon />}
+              title="Transações"
+              to="/transactions"
+              icon={<CreditCardIcon />}
               selected={selected}
               setSelected={setSelected}
             />

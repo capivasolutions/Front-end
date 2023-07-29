@@ -87,18 +87,6 @@ const Dashboard = () => {
           justifyContent="flex-end"
         >
           <StartDateSelector />
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "14px 20px",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
         </Box>
       </Box>
 
@@ -217,13 +205,6 @@ const Dashboard = () => {
               >
                 Valor total de legítimos: {formattedTotalAmountGenuine}
               </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
             </Box>
           </Box>
           <Box height="230px" m="-20px 0 0 0">

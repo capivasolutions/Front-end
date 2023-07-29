@@ -78,18 +78,6 @@ const TransactionDetails = () => {
           justifyContent="flex-end"
         >
           <StartDateSelector />
-          <Button
-            sx={{
-              backgroundColor: colors.blueAccent[700],
-              color: colors.grey[100],
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "14px 20px",
-            }}
-          >
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
         </Box>
       </Box>
 

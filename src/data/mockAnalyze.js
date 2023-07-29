@@ -31,15 +31,15 @@ export const mockBarV10 = [
 ];
 export const mockBarV16 = [
     { category: 'Fraude', value: -3.5498 },
-    { category: 'Legitimo', value: 0.0674 },
+    { category: 'Legítimo', value: 0.0674 },
 ];
 export const mockBarV11 = [
     { category: 'Fraude', value: 3.5862 },
-    { category: 'Legitimo', value: -0.0349 },
+    { category: 'Legítimo', value: -0.0349 },
 ];
 export const mockBarV9 = [
     { category: 'Fraude', value: -2.2088 },
-    { category: 'Legitimo', value: -0.05 },
+    { category: 'Legítimo', value: -0.05 },
 ];
 export const mockBarV4 = [
     { category: 'Fraude', value: 4.1771 },
@@ -47,5 +47,5 @@ export const mockBarV4 = [
 ];
 export const mockBarV18 = [
     { category: 'Fraude', value: -1.6643 },
-    { category: 'Legitimo', value: -0.0028 },
+    { category: 'Legítimo', value: -0.0028 },
 ];
