@@ -27,7 +27,7 @@ const PieChart = ({
       color: tokens("dark").blueAccent[500],
     },
     {
-      id: "Genuina",
+      id: "Legítimos",
       label: "Legítimos",
       value: genuineTransactions,
       color: tokens("dark").greenAccent[500],
@@ -84,12 +84,12 @@ const PieChart = ({
       arcLinkLabelsTextColor={colors.grey[100]}
       arcLinkLabelsThickness={2}
       arcLinkLabelsColor={{ from: "color" }}
-      enableArcLabels={false}
+      enableArcLabels={true}
       arcLabelsRadiusOffset={0.4}
       arcLabelsSkipAngle={7}
       arcLabelsTextColor={{
         from: "color",
-        modifiers: [["darker", 2]],
+        modifiers: [["darker", 5]],
       }}
       defs={[
         {
