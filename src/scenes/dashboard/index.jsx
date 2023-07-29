@@ -74,7 +74,7 @@ const Dashboard = () => {
   };
 
   return (
-    <Box m="20px">
+    <Box m="20px" pb="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Painel Administrativo" subtitle="Bem Vindo!" />

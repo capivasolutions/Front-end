@@ -1,6 +1,7 @@
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
+import {DateUtils} from "../utils/date";
 
 const LineChart = ({
   data = [],
@@ -20,7 +21,7 @@ const LineChart = ({
     const aggregatedData = new Map();
 
     sortedTransactions.forEach((transaction) => {
-      const timeKey = new Date(transaction.created_at).toLocaleTimeString();
+      const timeKey = DateUtils.formatTime(transaction.created_at);
       const existingData = aggregatedData.get(timeKey) || {
         time: timeKey,
         fraudAmount: 0,
