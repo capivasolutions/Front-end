@@ -1,4 +1,4 @@
-import { Box, Collapse, Typography, useTheme } from "@mui/material";
+import {Box, Chip, Collapse, Typography, useTheme} from "@mui/material";
 import { TransitionGroup } from 'react-transition-group';
 import { tokens } from "../../theme";
 import { CurrencyUtils } from "../../utils/currency";
@@ -43,16 +43,7 @@ export function RecentTransactions({ transactions, onClickTransaction }) {
                   p="15px"
                   sx={{ ':hover': { cursor: 'pointer', background: colors.primary[500] } }}
                 >
-                  <Box>
-                    <Typography
-                      color={colors.greenAccent[500]}
-                      variant="h5"
-                      fontWeight="600"
-                    >
-                      {transaction.id.slice(0, 8)}
-                    </Typography>
-                  </Box>
-                  <Box textAlign="center" color={colors.grey[100]}>
+                  <Box color={colors.grey[100]}>
                     <Typography>{transaction.classification === 'FRAUDULENT' ? 'Fraude' : 'Legítimo'}</Typography>
                     <Typography>{DateUtils.relativeDatefromNow(transaction.created_at)}</Typography>
                   </Box>
