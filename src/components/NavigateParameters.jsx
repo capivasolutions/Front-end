@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import Menu from '@mui/material/Menu';
+import React from 'react';
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import Button from '@mui/material/Button';
 
 const SimpleMenu = () => {
 
