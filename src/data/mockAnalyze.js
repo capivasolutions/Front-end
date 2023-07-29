@@ -1,21 +1,21 @@
 
  export  const mockBarImportance = [
-        { category: 'V4',       value: 87.0 },
-        { category: 'V26',      value: 73.0},
-        { category: 'V10',      value: 68.0 },
-        { category: 'Time',     value: 66.0 },
-        { category: 'V14',      value: 62.0 },
-        { category: 'V12',      value: 61.0 },
-        { category: 'V19',      value: 51.0 },
-        { category: 'V11',      value: 51.0 },
-        { category: 'Amount',   value: 40.0 },
-        { category: 'V2',       value: 33.0 },
+        { category: 'V17',       value: 0.17 },
+        { category: 'V14',      value: 0.12},
+        { category: 'V12',      value: 0.11 },
+        { category: 'V10',     value: 0.10 },
+        { category: 'V16',      value: 0.04 },
+        { category: 'V11',      value: 0.03 },
+        { category: 'V9',      value: 0.026 },
+        { category: 'V4',      value: 0.024 },
+        { category: 'V18',   value: 0.024 },
+        { category: 'V7',       value: 0.021 },
         // Add more data points as needed
     ].sort((a, b) => a.value - b.value);
 
 export const mockBarV4 = [
-    {category: 'V4-Fraude'  , value: 4.1771},
-    {category: 'V4-Legitimo', value: -0.0224},
+    {category: 'Fraude'  , value: 4.1771},
+    {category: 'Legitimo', value: -0.0224},
 ]
 export const mockBar26 = [
     {category: 'V26-Fraude'  , value: 0.0043},

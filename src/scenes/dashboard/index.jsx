@@ -207,7 +207,7 @@ const Dashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Comparando valor de transações
+                Comparando valor de transações no decorrer do tempo
               </Typography>
               {/* Genuinas */}
               <Typography
@@ -258,7 +258,7 @@ const Dashboard = () => {
           p="30px"
         >
           <Typography variant="h5" fontWeight="600">
-            Comparativo de Fraudes e legitimos
+            Comparativo de Fraudes e legítimos
           </Typography>
           <Box height="250px" m="-20px 0 0 0">
             <PieChart data={data} isDashboard={true} />
@@ -274,7 +274,7 @@ const Dashboard = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Top 6 Parametros mais importantes
+            Top 10 Parâmetros mais importantes
           </Typography>
           <Box height="90%" mt="-25px" ml="5px" mr="-80px">
             <BarChart isDashboard={true} data={mockBarImportance} />

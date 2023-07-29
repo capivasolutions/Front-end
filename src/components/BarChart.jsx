@@ -3,7 +3,7 @@ import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
 //import { mockBarData as data } from "../data/mockData";
 
-const BarChart = ({ isDashboard = false, data}) => {
+const BarChart = ({ isDashboard = false, data, colorsValue}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -52,7 +52,7 @@ const BarChart = ({ isDashboard = false, data}) => {
       layout="horizontal"
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
+      colors={colorsValue}
       defs={[
         {
           id: "dots",

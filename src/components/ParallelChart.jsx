@@ -8,7 +8,7 @@ export const ParallelChart = ({ data }) => {
   const colors = tokens(theme.palette.mode);
 
   const chartColors = data.map((item) => {
-    if (item.classification === "FRAUDULENT") return colors.blueAccent[500];
+    if (item.classification === "FRAUDULENT") return colors.blueAccent[400];
     else return colors.greenAccent[500];
   });
 
@@ -17,10 +17,15 @@ export const ParallelChart = ({ data }) => {
       data={data}
       variables={[
         { key: "v17", type: "linear" },
-        { key: "v12", type: "linear" },
         { key: "v14", type: "linear" },
+        { key: "v12", type: "linear" },
         { key: "v10", type: "linear" },
+        { key: "v16", type: "linear" },
         { key: "v11", type: "linear" },
+        { key: "v9", type: "linear" },
+        { key: "v4", type: "linear" },
+        { key: "v18", type: "linear" },
+        { key: "v7", type: "linear" },
       ]}
       curve="monotoneX"
       colors={chartColors}
@@ -59,6 +64,7 @@ export const ParallelChart = ({ data }) => {
           },
         },
       }}
+      lineOpacity={0.50}
       legends={[
         {
           anchor: "right",

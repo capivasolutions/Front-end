@@ -1,3 +1,4 @@
+
 import React from "react";
 import {CircularProgress } from "@mui/material";
 import { Box, Button, Typography, useTheme } from "@mui/material";
@@ -19,7 +20,7 @@ import { mockBarV4
 import { useParams } from "react-router-dom";
 import { useFetchTransaction } from "../../api/fetchTransaction";
 import { ParallelChart } from "../../components/ParallelChart";
-
+import SimpleMenu from "../../components/NavigateParameters";
 
 // PRINCIPAL
 const TransactionDetails = () => {
@@ -28,6 +29,7 @@ const TransactionDetails = () => {
     id: transactionId,
     limit: 150,
   });
+
   //////////////////////////////////////
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -38,7 +40,7 @@ const TransactionDetails = () => {
   if (loading) {
     return (
       <Box m="20px">
-        <Header title="Pie Chart" subtitle="Simple Pie Chart" />
+        <Header/>
         <Box
           display="flex"
           justifyContent="center"
@@ -60,7 +62,6 @@ const TransactionDetails = () => {
       </Box>
     );
   }
-  
 
   return (
     <Box m="20px">
@@ -76,6 +77,7 @@ const TransactionDetails = () => {
           alignItems="center"
           justifyContent="flex-end"
         >
+          <SimpleMenu/>
           <StartDateSelector />
           <Button
             sx={{
@@ -118,7 +120,7 @@ const TransactionDetails = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Comparação de Parametros
+                Comparação de Parametros - rotulos: v17 - v14 - v12 - v10 - v16 - v11 - v9 - v4 - v18 - v7
               </Typography>
             </Box>
             <Box>
@@ -133,7 +135,6 @@ const TransactionDetails = () => {
             {<ParallelChart data={[data?.transaction, ...data.comparable]} />}
           </Box>
         </Box>
-
         {/* ROW 1 */}
         <Box
           gridColumn="span 4"
@@ -296,24 +297,3 @@ const TransactionDetails = () => {
 };
 
 export default TransactionDetails;
-
-// import { Box } from "@mui/material";
-// import Header from "../../components/Header";
-// import PieChart from "../../components/PieChart";
-// import { useParams } from "react-router-dom";
-
-// const TransactionDetails = () => {
-
-//   const { transactionId } = useParams();
-//   return (
-//     <Box m="20px">
-//       <Header title="Pie Chart" subtitle="Simple Pie Chart" />
-//       <Box height="75vh">
-//         id da transação que vou conectar depois: {transactionId}
-//         <PieChart />
-//       </Box>
-//     </Box>
-//   );
-// };
-
-// export default TransactionDetails;
