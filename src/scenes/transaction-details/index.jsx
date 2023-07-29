@@ -67,7 +67,7 @@ const TransactionDetails = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Detalhamento de Transações" subtitle="Bem Vindo!" />
+        <Header title="Análise de Transações" />
         id da transação que vou conectar depois: {transactionId}
         <Box
           gap={2}
@@ -118,9 +118,17 @@ const TransactionDetails = () => {
               <Typography
                 variant="h4"
                 fontWeight="600"
+                marginBottom={1}
                 color={colors.grey[100]}
               >
-                Comparação de Parametros - rotulos: v17 - v14 - v12 - v10 - v16 - v11 - v9 - v4 - v18 - v7
+                Comparação de Parâmetros
+              </Typography>
+              <Typography
+                  variant="p"
+                  fontWeight="400"
+                  color={colors.grey[100]}
+              >
+                No gráfico abaixo é comparado uma transação fraudulenta/legítima com outras 100 transações mais recentes da classe oposta.
               </Typography>
             </Box>
             <Box>
