@@ -15,9 +15,6 @@ export function RecentTransactions({ transactions, onClickTransaction }) {
     new Date(b.created_at) - new Date(a.created_at)
   );
 
-  console.log('FIRST', sortedTransactions.at(0));
-  console.log('LAST', sortedTransactions.at(-1));
-
   const lastTransactions = sortedTransactions.splice(0, 100);
 
   return (
