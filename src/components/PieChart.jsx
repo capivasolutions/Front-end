@@ -21,7 +21,7 @@ const PieChart = ({
 
   const dataNew = [
     {
-      id: "Fraude",
+      id: "Fraudes",
       label: "Fraudes",
       value: fraudulentTransactions,
       color: tokens("dark").blueAccent[500],

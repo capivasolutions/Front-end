@@ -120,11 +120,9 @@ const Dashboard = () => {
           <StatBox
             title={countTransactions}
             subtitle="Número de transações"
-            progress="0.75"
-            increase="+14%"
             icon={
               <CreditCardIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: colors.grey[100], fontSize: "26px" }}
               />
             }
           />
@@ -139,8 +137,6 @@ const Dashboard = () => {
           <StatBox
             title={genuineTransactions}
             subtitle="Legítimos"
-            progress="0.50"
-            increase="+21%"
             icon={
               <DoneIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -158,11 +154,9 @@ const Dashboard = () => {
           <StatBox
             title={fraudulentTransactions}
             subtitle="Fraudes"
-            progress="0.30"
-            increase="+5%"
             icon={
               <CancelIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: colors.blueAccent[600], fontSize: "26px" }}
               />
             }
           />
@@ -177,11 +171,9 @@ const Dashboard = () => {
           <StatBox
             title={formattedTotalAmount}
             subtitle="Valor total de transações"
-            progress="0.80"
-            increase="+43%"
             icon={
               <PaymentsIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: colors.grey[100], fontSize: "26px" }}
               />
             }
           />
@@ -202,11 +194,12 @@ const Dashboard = () => {
           >
             <Box>
               <Typography
-                variant="h4"
+                variant="h5"
                 fontWeight="600"
+                marginBottom={1}
                 color={colors.grey[100]}
               >
-                Comparando valor de transações no decorrer do tempo
+                Comparativo do valor de transações no decorrer do tempo
               </Typography>
               {/* Genuinas */}
               <Typography
@@ -233,7 +226,7 @@ const Dashboard = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
+          <Box height="230px" m="-20px 0 0 0">
             <LineChart data={data} isDashboard={true} />
           </Box>
         </Box>
