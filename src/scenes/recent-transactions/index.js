@@ -1,4 +1,4 @@
-import {Box, Chip, Collapse, Typography, useTheme} from "@mui/material";
+import {Box, Collapse, Typography, useTheme} from "@mui/material";
 import { TransitionGroup } from 'react-transition-group';
 import { tokens } from "../../theme";
 import { CurrencyUtils } from "../../utils/currency";
