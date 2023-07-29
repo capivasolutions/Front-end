@@ -21,7 +21,6 @@ export const ParallelChart = ({ data }) => {
         { key: "v12", type: "linear" },
         { key: "v10", type: "linear" },
         { key: "v16", type: "linear" },
-
         { key: "v11", type: "linear" },
         { key: "v9", type: "linear" },
         { key: "v4", type: "linear" },
@@ -30,6 +29,7 @@ export const ParallelChart = ({ data }) => {
       ]}
       curve="monotoneX"
       colors={chartColors}
+      lineWidth={10}
       margin={{ top: 50, right: 80, bottom: 50, left: 50 }}
       theme={{
         axis: {
