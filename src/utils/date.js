@@ -32,7 +32,11 @@ export class DateUtils {
     return dayjs().subtract(1, 'year');
   }
 
-  static relativeDatefromNow(date) {
+  static formatDateTime(date) {
     return dayjs.utc(`${date}Z`).tz(timeZone).format('DD/MM/YYYY HH:mm:ss')
+  }
+
+  static formatTime(date) {
+    return dayjs.utc(`${date}Z`).tz(timeZone).format('HH:mm:ss')
   }
 }

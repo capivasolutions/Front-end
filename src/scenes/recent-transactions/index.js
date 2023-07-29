@@ -14,6 +14,10 @@ export function RecentTransactions({ transactions, onClickTransaction }) {
   }).sort((a, b) =>
     new Date(b.created_at) - new Date(a.created_at)
   );
+
+  console.log('FIRST', sortedTransactions.at(0));
+  console.log('LAST', sortedTransactions.at(-1));
+
   const lastTransactions = sortedTransactions.splice(0, 100);
 
   return (
@@ -45,7 +49,7 @@ export function RecentTransactions({ transactions, onClickTransaction }) {
                 >
                   <Box color={colors.grey[100]}>
                     <Typography>{transaction.classification === 'FRAUDULENT' ? 'Fraude' : 'Legítimo'}</Typography>
-                    <Typography>{DateUtils.relativeDatefromNow(transaction.created_at)}</Typography>
+                    <Typography>{DateUtils.formatDateTime(transaction.created_at)}</Typography>
                   </Box>
                   <Box
                     backgroundColor={transaction.classification === 'FRAUDULENT' ? colors.blueAccent[600] : colors.greenAccent[600]}
