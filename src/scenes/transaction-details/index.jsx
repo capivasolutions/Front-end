@@ -68,7 +68,6 @@ const TransactionDetails = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Análise de Transações" />
-        id da transação que vou conectar depois: {transactionId}
         <Box
           gap={2}
           width="100%"
