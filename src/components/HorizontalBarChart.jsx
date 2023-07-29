@@ -1,9 +1,8 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-//import { mockBarData as data } from "../data/mockData";
 
-const BarChart = ({ isDashboard = false, data, color }) => {
+const HorizontalBarChart = ({ isDashboard = false, data }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -52,7 +51,7 @@ const BarChart = ({ isDashboard = false, data, color }) => {
       layout="horizontal"
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={[colors.blueAccent[500], colors.greenAccent[500], color]}
+      colors={{ scheme: 'spectral' }}
       defs={[
         {
           id: "dots",
@@ -111,4 +110,4 @@ const BarChart = ({ isDashboard = false, data, color }) => {
   );
 };
 
-export default BarChart;
+export default HorizontalBarChart;

@@ -1,26 +1,25 @@
-
 import React from "react";
-import {CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import Header from "../../components/Header";
 import BarChart from "../../components/BarChart";
 import { StartDateSelector } from "../../components/StartDateSelector";
-import { mockBarV4
-        ,mockBar26
-        ,mockBarV10
-        ,mockBarTime
-        ,mockBarV14
-        ,mockBarV12
-        ,mockBarV11
-        ,mockBarV19
-        ,mockBarAmount
-      } from "../../data/mockAnalyze";
+import {
+  mockBarV4,
+  mockBarV10,
+  mockBarV14,
+  mockBarV12,
+  mockBarV11,
+  mockBarV17,
+  mockBarV16,
+  mockBarV9,
+  mockBarV18,
+} from "../../data/mockAnalyze";
 import { useParams } from "react-router-dom";
 import { useFetchTransaction } from "../../api/fetchTransaction";
 import { ParallelChart } from "../../components/ParallelChart";
-import SimpleMenu from "../../components/NavigateParameters";
 
 // PRINCIPAL
 const TransactionDetails = () => {
@@ -33,14 +32,16 @@ const TransactionDetails = () => {
   //////////////////////////////////////
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  // const { startDate } = useStartDate();
 
-  console.log("error", loading);
+  const getColor = () => {
+    if (data?.transaction?.classification === 'GENUINE') return colors.greenAccent[300];
+    return colors.blueAccent[300];
+  }
 
   if (loading) {
     return (
       <Box m="20px">
-        <Header/>
+        <Header />
         <Box
           display="flex"
           justifyContent="center"
@@ -76,7 +77,6 @@ const TransactionDetails = () => {
           alignItems="center"
           justifyContent="flex-end"
         >
-          <SimpleMenu/>
           <StartDateSelector />
           <Button
             sx={{
@@ -122,21 +122,12 @@ const TransactionDetails = () => {
               >
                 Comparação de Parâmetros
               </Typography>
-              <Typography
-                  variant="p"
-                  fontWeight="400"
-                  color={colors.grey[100]}
-              >
-                No gráfico abaixo é comparado uma transação fraudulenta/legítima com outras 100 transações mais recentes da classe oposta.
+              <Typography variant="p" fontWeight="400" color={colors.grey[100]}>
+                No gráfico abaixo é comparado uma transação fraudulenta/legítima
+                com outras 100 transações mais recentes da classe oposta.
               </Typography>
             </Box>
-            <Box>
-              {/* <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton> */}
-            </Box>
+            <Box></Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
             {<ParallelChart data={[data?.transaction, ...data.comparable]} />}
@@ -153,62 +144,17 @@ const TransactionDetails = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            V4 x V4
+            V17 x V17
           </Typography>
           <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarV4} />
-          </Box>
-        </Box>
-
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            V26 x V26
-          </Typography>
-          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBar26} />
-          </Box>
-        </Box>
-        
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            V10 x V10
-          </Typography>
-          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarV10} />
-          </Box>
-        </Box>
-
-        {/* ROW 2 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Time x Time
-          </Typography>
-          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarTime} />
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV17,
+                { category: "Transação", value: data?.transaction?.v17 },
+              ]}
+              color={getColor()}
+            />
           </Box>
         </Box>
 
@@ -225,42 +171,14 @@ const TransactionDetails = () => {
             V14 x V14
           </Typography>
           <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarV14} />
-          </Box>
-        </Box>
-        
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            V12 x V12
-          </Typography>
-          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarV12} />
-          </Box>
-        </Box>
-        
-        {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            V11 x V11
-          </Typography>
-          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarV11} />
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV14,
+                { category: "Transação", value: data?.transaction?.v14 },
+              ]}
+              color={getColor()}
+            />
           </Box>
         </Box>
 
@@ -274,13 +192,20 @@ const TransactionDetails = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            V19 x V19
+            V12 x V12
           </Typography>
           <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarV19} />
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV12,
+                { category: "Transação", value: data?.transaction?.v12 },
+              ]}
+              color={getColor()}
+            />
           </Box>
         </Box>
-        
+
         <Box
           gridColumn="span 4"
           gridRow="span 2"
@@ -291,12 +216,140 @@ const TransactionDetails = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Amount x Amount
+            V10 x V10
           </Typography>
           <Box height="90%" mt="-25px" ml="5px" mr="-80px">
-            <BarChart isDashboard={true} data={mockBarAmount} />
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV10,
+                { category: "Transação", value: data?.transaction?.v10 },
+              ]}
+              color={getColor()}
+            />
           </Box>
         </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            V16 x V16
+          </Typography>
+          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV16,
+                { category: "Transação", value: data?.transaction?.v16 },
+              ]}
+              color={getColor()}
+            />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            V11 x V11
+          </Typography>
+          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV11,
+                { category: "Transação", value: data?.transaction?.v11 },
+              ]}
+              color={getColor()}
+            />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            V9 x V9
+          </Typography>
+          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV9,
+                { category: "Transação", value: data?.transaction?.v9 },
+              ]}
+              color={getColor()}
+            />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            V4 x V4
+          </Typography>
+          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV4,
+                { category: "Transação", value: data?.transaction?.v4 },
+              ]}
+              color={getColor()}
+            />
+          </Box>
+        </Box>
+
+        <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
+          >
+            V18 x V18
+          </Typography>
+          <Box height="90%" mt="-25px" ml="5px" mr="-80px">
+            <BarChart
+              isDashboard={true}
+              data={[
+                ...mockBarV18,
+                { category: "Transação", value: data?.transaction?.v18 },
+              ]}
+              color={getColor()}
+            />
+          </Box>
+        </Box>
+
         {/* Final */}
       </Box>
     </Box>

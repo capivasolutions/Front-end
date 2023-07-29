@@ -7,7 +7,6 @@ import CancelIcon from "@mui/icons-material/CloseOutlined";
 import DoneIcon from "@mui/icons-material/DoneOutlined";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
-import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
 import PieChart from "../../components/PieChart";
 import { useFetchTransactions } from "../../api";
@@ -17,6 +16,7 @@ import { StartDateSelector } from "../../components/StartDateSelector";
 import { useStartDate } from "../../hooks/useStartDate";
 import { useNavigate } from "react-router-dom";
 import { mockBarImportance} from "../../data/mockAnalyze";
+import HorizontalBarChart from "../../components/HorizontalBarChart";
 
 
 const UPDATE_SCREEN_INTERVAL = 2000; // ms
@@ -269,7 +269,7 @@ const Dashboard = () => {
             {mockBarImportance.length} Parâmetros mais importantes
           </Typography>
           <Box height="90%" mt="-25px">
-            <BarChart isDashboard={true} data={mockBarImportance} />
+            <HorizontalBarChart isDashboard={true} data={mockBarImportance} />
           </Box>
         </Box>
       </Box>
